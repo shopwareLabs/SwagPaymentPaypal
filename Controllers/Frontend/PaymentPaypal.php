@@ -148,6 +148,7 @@ class Shopware_Controllers_Frontend_PaymentPaypal extends Shopware_Controllers_F
 
         $borderColor = ltrim($config->get('paypalCartBorderColor'), '#');
         $paymentAction = $config->get('paypalPaymentAction', 'Sale');
+        $noShipping = $config->get('paypalNoShipping', 0);
         $user = $this->getUser();
 
         $params = array(
@@ -166,6 +167,7 @@ class Shopware_Controllers_Frontend_PaymentPaypal extends Shopware_Controllers_F
             'GIROPAYCANCELURL' => $router->assemble(array('action' => 'cancel', 'forceSecure' => true)),
             'BANKTXNPENDINGURL' => $router->assemble(array('action' => 'return', 'forceSecure' => true)),
             'ALLOWNOTE' => 1,
+            'NOSHIPPING' => $noShipping,
             'ADDROVERRIDE' => $user === null ? 0 : 1,
             'BRANDNAME' => $shopName,
             'LOGOIMG' => $logoImage,
